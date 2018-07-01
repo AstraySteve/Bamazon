@@ -9,13 +9,13 @@ CREATE TABLE products(
 );
 
 insert into products (product_name, department_name, price, stock_quanity) values 
-("Sombrero", "Hats", 1.00, 10),
-("Dummy data1", "Dummy Departmant", 1.00, 10),
-("Dummy data2", "Dummy Departmant", 1.00, 10),
-("Dummy data3", "Dummy Departmant", 1.00, 10),
-("Dummy data4", "Dummy Departmant", 1.00, 10),
-("Dummy data5", "Dummy Departmant", 1.00, 10),
-("Dummy data6", "Dummy Departmant", 1.00, 10),
-("Dummy data7", "Dummy Departmant", 1.00, 10),
-("Dummy data8", "Dummy Departmant", 1.00, 10),
-("Dummy data9", "Dummy Departmant", 1.00, 10);
+("Sombrero", "Clothing", 1.00, 10),
+("Laptops", "Electronics", 975.00, 6),
+("T-Shirts", "Clothing", 15.00, 20),
+("Bucket-O-Nothing", "Misc", 99.99, 99),
+("Model Kit", "Hobbies", 60.00, 8),
+("Lightsaber", "Weapons", 2000.50, 1),
+("PlayStation 4", "Electronics", 499.99, 4),
+("Top Hat", "Clothing", 10.00, 15),
+("Figurine", "Hobbies", 128.32, 3),
+("Batteries", "Electronics", 0.50, 200);
