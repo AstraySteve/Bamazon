@@ -81,7 +81,7 @@ updateInventory = () =>{
         },
         {
             type: "input",
-            message: "Enter the updated amount",
+            message: "Enter the amount to be added to stock",
             name: "stock"
         }
     ]).then(answers => {
@@ -94,7 +94,9 @@ updateInventory = () =>{
                 connection.end();
             }
             else{
-                connection.query(`UPDATE products SET stock_quanity = ? WHERE id = ?`,[answers.stock, answers.productID]);
+                var newTotal = parseInt(results[0].stock_quanity) + parseInt(answers.stock);
+                connection.query(`UPDATE products SET stock_quanity = ? WHERE id = ?`,[newTotal, answers.productID]);
+                console.log(`Updated product: ${results[0].product_name} stock levels to: ${newTotal}`);
             }
         });
     });
