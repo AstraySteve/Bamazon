@@ -4,6 +4,7 @@
 */
 var db = require('./db');
 var inquirer = require('inquirer');
+const cTable = require('console.table');
 
 //Set up connection to database
 var connection = db.login();
@@ -14,7 +15,7 @@ connection.connect(function(err){
     displayOptions();
 });
 
-displayOptions = () =>{
+displayOptions =()=>{
     //Prompt user with a choice of options
     inquirer.prompt([
         {
@@ -26,7 +27,7 @@ displayOptions = () =>{
     ]).then(answers => {
         switch (answers.options){
             case "View Product Sales by Department":
-                console.log("Do Something!");
+                viewSales();
                 break;
             case "Create New Department":
                 addDepartment();
@@ -35,7 +36,7 @@ displayOptions = () =>{
     });
 }
 
-addDepartment = () =>{
+addDepartment =()=>{
     //Function adds a new department to table
     inquirer.prompt([
         {
@@ -52,5 +53,26 @@ addDepartment = () =>{
         connection.query(`INSERT INTO departments (department_name, over_head_costs)
         VALUES (?,?)`, [answers.departmentName, parseFloat(answers.overheadCost)]);
         console.log("Added Product: " + answers.productName);
+    });
+}
+
+viewSales =()=>{
+    //Functions shows table with columns id, department, overhead, sales and profits to terminal
+
+    //sums up products and orders them by department name
+    connection.query(`SELECT ROUND(SUM(product_sales),2), department_name FROM products GROUP BY department_name`, (err, data)=>{
+        if(err){
+            throw err;
+        }
+        console.table(data);
+    });
+
+    //Displays all from departments
+    connection.query(`SELECT * FROM departments`, (err, data)=>{
+        if (err){
+            throw err;
+        }
+        //console.table(data);
+        //console.log(JSON.stringify(data, null, 2));
     });
 }
