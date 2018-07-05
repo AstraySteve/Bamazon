@@ -6,7 +6,7 @@ CREATE TABLE products(
     department_name VARCHAR(30),
     price float not null,
     stock_quanity int default 0,
-    product_sales int default 0
+    product_sales float default 0
 );
 
 insert into products (product_name, department_name, price, stock_quanity) values 
@@ -26,3 +26,10 @@ CREATE TABLE departments(
     department_name VARCHAR(30),
     over_head_costs float default 0
 );
+
+insert into departments(department_name, over_head_costs) values
+("Clothing", 100),
+("Electronics", 1000),
+("Hobbies", 300),
+("Weapons", 30000),
+("Misc", 50);

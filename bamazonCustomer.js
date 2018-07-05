@@ -57,14 +57,17 @@ askCustomer = () =>{
                 var newQuanity = parseInt(results[0].stock_quanity) - parseInt(answers.amount);
                 if (newQuanity < 0){
                     console.log("Insufficient quantity!");
-                    connection.end();
+                    //connection.end();
                 }
                 else{
-                    connection.query(`UPDATE products SET stock_quanity = ? WHERE id = ?`,
-                    [newQuanity, answers.productID]);
                     var total = (answers.amount * parseFloat(results[0].price)).toFixed(2);
+                    var totalSales = (parseFloat((results[0].product_sales).toFixed(2)) + total);
+                    console.log("updated total" +totalSales);
+                    connection.query(`UPDATE products SET stock_quanity = ?, product_sales = ? WHERE id = ?`,
+                    [newQuanity, totalSales, answers.productID]);
                     console.log(`Order placed, your total is: $ ${total}`);
                 }
+                connection.end();
             }
         });
     });
