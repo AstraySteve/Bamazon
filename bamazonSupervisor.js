@@ -58,8 +58,25 @@ addDepartment =()=>{
 
 viewSales =()=>{
     //Functions shows table with columns id, department, overhead, sales and profits to terminal
+    
+    connection.query(
+        `SELECT T3.id AS department_id, T3.department_name, T3.over_head_costs, T3.Product_Sales, (ROUND(SUM(T3.Product_Sales - T3.over_head_costs),2)) AS Total_Profits
+        FROM (
+            SELECT departments.id, departments.department_name, departments.over_head_costs, T2.Product_Sales
+            FROM departments
+            LEFT JOIN (SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
+                FROM products 
+                GROUP BY department_name) AS T2
+            ON departments.department_name = T2.department_name) AS T3
+        GROUP BY T3.department_name`, (err,data)=>{
+        if(err){
+            throw err;
+        }
+        console.table(data);
+    });
 
     /*
+    //TEST CODE
     //sums up products and orders them by department name
     connection.query(`SELECT ROUND(SUM(product_sales),2), department_name FROM products GROUP BY department_name`, (err, data)=>{
         if(err){
@@ -76,19 +93,5 @@ viewSales =()=>{
         console.table(data);
         //console.log(JSON.stringify(data, null, 2));
     });*/
-    
-    //Attempt at joining
-    connection.query(
-        `SELECT departments.id, departments.department_name, departments.over_head_costs, T2.Product_Sales
-        FROM departments
-        LEFT JOIN (SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
-            FROM products 
-            GROUP BY department_name) AS T2
-        ON departments.department_name = T2.department_name`, (err,data)=>{
-        if(err){
-            throw err;
-        }
-        console.table(data);
-    });
 
 }
