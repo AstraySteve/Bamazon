@@ -76,23 +76,14 @@ viewSales =()=>{
         console.table(data);
         //console.log(JSON.stringify(data, null, 2));
     });*/
-
-    connection.query(`SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
-    FROM products 
-    GROUP BY department_name`, (err,data)=>{
-        if(err){
-            throw err;
-        }
-        console.table(data);
-    })
     
     //Attempt at joining
     connection.query(
         `SELECT departments.id, departments.department_name, departments.over_head_costs, T2.Product_Sales
         FROM departments
         LEFT JOIN (SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
-        FROM products 
-        GROUP BY department_name) AS T2
+            FROM products 
+            GROUP BY department_name) AS T2
         ON departments.department_name = T2.department_name`, (err,data)=>{
         if(err){
             throw err;
