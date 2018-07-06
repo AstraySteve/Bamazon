@@ -59,6 +59,7 @@ addDepartment =()=>{
 viewSales =()=>{
     //Functions shows table with columns id, department, overhead, sales and profits to terminal
 
+    /*
     //sums up products and orders them by department name
     connection.query(`SELECT ROUND(SUM(product_sales),2), department_name FROM products GROUP BY department_name`, (err, data)=>{
         if(err){
@@ -66,13 +67,37 @@ viewSales =()=>{
         }
         console.table(data);
     });
-
+    
     //Displays all from departments
     connection.query(`SELECT * FROM departments`, (err, data)=>{
         if (err){
             throw err;
         }
-        //console.table(data);
+        console.table(data);
         //console.log(JSON.stringify(data, null, 2));
+    });*/
+
+    connection.query(`SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
+    FROM products 
+    GROUP BY department_name`, (err,data)=>{
+        if(err){
+            throw err;
+        }
+        console.table(data);
+    })
+    
+    //Attempt at joining
+    connection.query(
+        `SELECT departments.id, departments.department_name, departments.over_head_costs, T2.Product_Sales
+        FROM departments
+        LEFT JOIN (SELECT department_name, (ROUND(SUM(product_sales),2)) AS Product_Sales
+        FROM products 
+        GROUP BY department_name) AS T2
+        ON departments.department_name = T2.department_name`, (err,data)=>{
+        if(err){
+            throw err;
+        }
+        console.table(data);
     });
+
 }
