@@ -4,6 +4,7 @@ An MySQL and node.js exercise
 Bamazon is a Command Line Interface App with 3 commands:
 - bamazonCustomer.js
     - This app will first display all items avaliable for purchase: id, name and price
+    ![IMG1](./images/img1.png)
     - User is presented with 2 questions:
         - enter product ID of the item they wish to buy
         - enter the amount they wish to buy
