@@ -9,13 +9,24 @@ Bamazon is a Command Line Interface App with 3 commands:
         - enter product ID of the item they wish to buy
         - enter the amount they wish to buy
     - Total cost will be displayed and changes will be updated in the database
+    ![IMG2](./images/img2.png)
+    - User will get a message if there is insufficient stock
+    ![IMG3](./images/img3.png)
 - bamazonManager.js
     - This app will provide a list of options
-        - *insert screen shot here*
+        ![IMG4](./images/img4.png)
+        - View Products for Sale will return a similar output as bamazonCustomer with added info such as stock_quantity
+        - View Low inventory will return all items with stock less than 5
+        ![IMG5](./images/img5.png)
+        - Add to inventory will update stock levels
+        - Add new product allows user to enter a new row to database
 
 - bamazonSupervisor.js
     - This app will provide 2 options
-        - *insert screenshot here*
+        ![IMG6](./images/img6.png)
+        - View Sales by department will return the following table
+        ![IMG7](./images/img7.png)
+        - Create new department allows user to enter a new row to database
 
 ##### Note: 
 - This is a simple app and therefore all commands can be accessed without need for authentication
